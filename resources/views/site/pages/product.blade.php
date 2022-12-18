@@ -17,25 +17,41 @@
                                     @if ($product->images->count() > 0)
                                         <div class="img-big-wrap">
                                             <div class="padding-y">
-                                                <a href="{{ asset('storage/'.$product->images->first()->full) }}" data-fancybox="">
-                                                    <img src="{{ asset('storage/'.$product->images->first()->full) }}" alt="">
-                                                </a>
+                                                <div id="myCarousel" class="carousel slide" data-ride="carousel"
+                                                    align="center">
+                                                    <div class="carousel-inner">
+
+                                                        @foreach ($product->images as $image)
+                                                            <div  href="{{ asset('storage/' . $image->full) }}"
+                                                                data-fancybox=""
+                                                                class="carousel-item {{ $loop->index == 0 ? 'active' : '' }}" >
+                                                                <img src="{{ asset('storage/' . $image->full) }}"
+                                                                    alt="">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <ol class="carousel-indicators list-inline">
+                                                        @foreach ($product->images as $image)
+                                                            <li
+                                                                class="list-inline-item {{ $loop->index == 0 ? 'active' : '' }}">
+                                                                <a id="carousel-selector-{{ $loop->index }}"
+                                                                    class="selected" data-slide-to={{ $loop->index }}
+                                                                    data-target="#myCarousel"> <img
+                                                                        src="{{ asset('storage/' . $product->images->first()->full) }}"
+                                                                        class="img-fluid rounded"> </a> </li>
+                                                        @endforeach
+
+
+                                                    </ol>
+                                                </div>
                                             </div>
                                         </div>
                                     @else
                                         <div class="img-big-wrap">
                                             <div>
-                                                <a href="https://via.placeholder.com/176" data-fancybox=""><img src="https://via.placeholder.com/176"></a>
+                                                <a href="https://via.placeholder.com/176" data-fancybox=""><img
+                                                        src="https://via.placeholder.com/176"></a>
                                             </div>
-                                        </div>
-                                    @endif
-                                     @if ($product->images->count() > 0)
-                                        <div class="img-small-wrap">
-                                            @foreach($product->images as $image)
-                                                <div class="item-gallery">
-                                                    <img src="{{ asset('storage/'.$image->full) }}" alt="">
-                                                </div>
-                                            @endforeach
                                         </div>
                                     @endif
                                 </article>
@@ -52,33 +68,41 @@
                                     <div class="mb-3">
                                         @if ($product->sale_price > 0)
                                             <var class="price h3 text-danger">
-                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span class="num" id="productPrice">{{ $product->sale_price }}</span>
-                                                <del class="price-old"> {{ config('settings.currency_symbol') }}{{ $product->price }}</del>
+                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span
+                                                    class="num" id="productPrice">{{ $product->sale_price }}</span>
+                                                <del class="price-old">
+                                                    {{ config('settings.currency_symbol') }}{{ $product->price }}</del>
                                             </var>
                                         @else
-                                            <var class="price h3 text-success">
-                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span class="num" id="productPrice">{{ $product->price }}</span>
+                                            <var class="price h3 text-warning">
+                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span
+                                                    class="num" id="productPrice">{{ $product->price }}</span>
                                             </var>
                                         @endif
                                     </div>
                                     <hr>
-                                    <form action="{{ route('product.add.cart') }}" method="POST" role="form" id="addToCart">
+                                    <form action="{{ route('product.add.cart') }}" method="POST" role="form"
+                                        id="addToCart">
                                         @csrf
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <dl class="dlist-inline">
-                                                    @foreach($attributes as $attribute)
+                                                    @foreach ($attributes as $attribute)
                                                         @php $attributeCheck = in_array($attribute->id, $product->attributes->pluck('attribute_id')->toArray()) @endphp
                                                         @if ($attributeCheck)
                                                             <dt>{{ $attribute->name }}: </dt>
                                                             <dd>
-                                                                <select class="form-control form-control-sm option" style="width:180px;" name="{{ strtolower($attribute->name ) }}">
-                                                                    <option data-price="0" value="0"> Select a {{ $attribute->name }}</option>
-                                                                    @foreach($product->attributes as $attributeValue)
+                                                                <select class="form-control form-control-sm option"
+                                                                    style="width:180px;"
+                                                                    name="{{ strtolower($attribute->name) }}">
+                                                                    <option data-price="0" value="0"> Select a
+                                                                        {{ $attribute->name }}</option>
+                                                                    @foreach ($product->attributes as $attributeValue)
                                                                         @if ($attributeValue->attribute_id == $attribute->id)
                                                                             <option
                                                                                 data-price="{{ $attributeValue->price }}"
-                                                                                value="{{ $attributeValue->value }}"> {{ ucwords($attributeValue->value . ' +'. $attributeValue->price) }}
+                                                                                value="{{ $attributeValue->value }}">
+                                                                                {{ ucwords($attributeValue->value . ' +' . $attributeValue->price) }}
                                                                             </option>
                                                                         @endif
                                                                     @endforeach
@@ -95,15 +119,19 @@
                                                 <dl class="dlist-inline">
                                                     <dt>Quantity: </dt>
                                                     <dd>
-                                                        <input class="form-control" type="number" min="1" value="1" max="{{ $product->quantity }}" name="qty" style="width:70px;">
+                                                        <input class="form-control" type="number" min="1"
+                                                            value="1" max="{{ $product->quantity }}" name="qty"
+                                                            style="width:70px;">
                                                         <input type="hidden" name="productId" value="{{ $product->id }}">
-                                                        <input type="hidden" name="price" id="finalPrice" value="{{ $product->sale_price != '' ? $product->sale_price : $product->price }}">
+                                                        <input type="hidden" name="price" id="finalPrice"
+                                                            value="{{ $product->sale_price != '' ? $product->sale_price : $product->price }}">
                                                     </dd>
                                                 </dl>
                                             </div>
                                         </div>
                                         <hr>
-                                        <button type="submit" class="btn btn-success"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
+                                        <button type="submit" class="btn btn-warning"><i class="fas fa-shopping-cart"></i>
+                                            Add To Cart</button>
                                     </form>
                                 </article>
                             </aside>
@@ -123,15 +151,16 @@
 @stop
 @push('scripts')
     <script>
-        $(document).ready(function () {
-            $('#addToCart').submit(function (e) {
+        $(document).ready(function() {
+            $('#addToCart').submit(function(e) {
                 if ($('.option').val() == 0) {
                     e.preventDefault();
                     alert('Please select an option');
                 }
             });
-            $('.option').change(function () {
-                $('#productPrice').html("{{ $product->sale_price != '' ? $product->sale_price : $product->price }}");
+            $('.option').change(function() {
+                $('#productPrice').html(
+                    "{{ $product->sale_price != '' ? $product->sale_price : $product->price }}");
                 let extraPrice = $(this).find(':selected').data('price');
                 let price = parseFloat($('#productPrice').html());
                 let finalPrice = (Number(extraPrice) + price).toFixed(2);
@@ -141,3 +170,36 @@
         });
     </script>
 @endpush
+
+<style>
+    .carousel-inner img {
+        width: 100%
+    }
+
+    .carousel-item img {
+        width: 320px;
+        height: 240px !important
+    }
+
+    #myCarousel .carousel-indicators {
+        position: static;
+        margin-top: 0px
+    }
+
+    #myCarousel .carousel-indicators>li {
+        width: 100px
+    }
+
+    #myCarousel .carousel-indicators li img {
+        display: block;
+        opacity: 0.5
+    }
+
+    #myCarousel .carousel-indicators li.active img {
+        opacity: 1
+    }
+
+    #myCarousel .carousel-indicators li:hover img {
+        opacity: 0.75
+    }
+</style>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4d0100; color:antiquewhite">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav"
                 aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
                     @foreach($cat->items as $category)
                         @if ($category->items->count() > 0)
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{{ route('category.show', $category->slug) }}" id="{{ $category->slug }}"
+                                <a class="nav-link dropdown-toggle text-white" href="{{ route('category.show', $category->slug) }}" id="{{ $category->slug }}"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $category->name }}</a>
                                 <div class="dropdown-menu" aria-labelledby="{{ $category->slug }}">
                                     @foreach($category->items as $item)

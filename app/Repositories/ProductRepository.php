@@ -40,6 +40,19 @@ class ProductRepository extends BaseRepository implements ProductContract
         return $this->all($columns, $order, $sort);
     }
 
+
+    /**
+     * @param array $columns
+     * @param string $orderBy
+     * @param string $sortBy
+     * * @param string $filterBy
+     * @return mixed
+     */
+    public function filterProducts($columns = array('*'), string $order = 'id', string $sort = 'asc', string $filter = 'featured')
+    {
+        return $this->all($columns, $order, $sort,$filter);
+    }
+
     /**
      * @param int $id
      * @return mixed

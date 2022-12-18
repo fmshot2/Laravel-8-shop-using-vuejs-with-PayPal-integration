@@ -1,7 +1,7 @@
 @extends('site.app')
 @section('title', $category->name)
 @section('content')
-<section class="section-pagetop bg-dark">
+<section class="section-pagetop bg-danger">
     <div class="container clearfix">
         <h2 class="title-page">{{ $category->name }}</h2>
     </div>
