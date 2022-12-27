@@ -51,7 +51,7 @@ class BaseRepository implements BaseContract
      * @param string $sortBy
      * @return mixed
      */
-    public function all($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc')
+    public function all($columns = array('*'), string $orderBy = 'id', string $sortBy = 'DESC')
     {
         return $this->model->orderBy($orderBy, $sortBy)->get($columns);
     }
@@ -63,9 +63,9 @@ class BaseRepository implements BaseContract
      * * @param string $filterBy
      * @return mixed
      */
-    public function filter($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc', string $filterBy = 'featured')
+    public function filter(string $order = 'id', string $sort = 'asc', $columns = array('*'), string $filter)
     {
-        return $this->model->where($filterBy, TRUE)->orderBy($orderBy, $sortBy)->get($columns);
+        return $this->model->where($filter, TRUE)->orderBy($order, $sort)->get($columns);
     }
 
     /**

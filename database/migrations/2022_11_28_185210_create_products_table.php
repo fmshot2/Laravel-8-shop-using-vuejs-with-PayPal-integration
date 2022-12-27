@@ -29,10 +29,11 @@ class CreateProductsTable extends Migration
             $table->decimal('sale_price', 8, 2)->nullable();
             $table->boolean('status')->default(1);
             $table->boolean('featured')->default(0);
+            $table->boolean('best_selling')->default(0);
+            $table->boolean('top_ranked')->default(0);
+            $table->boolean('best_deals')->default(0);
             // $table->integer('brand_id');
             // $table->foreign('brand_id')->references('id')->on('brands');
-
-
             // $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
 
             $table->timestamps();

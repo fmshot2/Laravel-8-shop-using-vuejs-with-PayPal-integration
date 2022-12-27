@@ -40,7 +40,9 @@ interface BaseContract
      * * @param string $filterBy
      * @return mixed
      */
-    public function filter($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc', string $filterBy = 'featured');
+    // public function filter(string $order = 'id', string $sort = 'asc', $columns = array('*'), string $filter)
+
+    public function filter(string $orderBy = 'id', string $sort = 'asc', $columns = array('*'), string $filterBy);
 
     /**
      * Find one by ID

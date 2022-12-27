@@ -25,7 +25,7 @@ interface ProductContract
      * * @param string $filterBy
      * @return mixed
      */
-    public function filterProducts($columns = array('*'), string $order = 'id', string $sort = 'asc', string $filter = 'featured');
+    public function filterProducts(string $order = 'id', string $sort = 'asc',  array $columns = ['*'], string $filter);
 
     /**
      * @param int $id
@@ -56,4 +56,11 @@ interface ProductContract
      * @return mixed
      */
     public function findProductBySlug($slug);
+
+    /**
+     * @param string $order
+     * @param string $sort
+     * @param array $columns
+     * @return mixed
+     */
 }

@@ -28,6 +28,18 @@ class ProductController extends Controller
         return view('site.pages.product', compact('product', 'attributes'));
     }
 
+    public function home()
+    {
+        $featuredProducts = $this->productRepository->filterProducts($order = 'id', $sort = 'asc',  $columns = ['*'], 'featured');
+        $products = $this->productRepository->listProducts()->reverse()->values();
+
+
+        // $attributes = $this->attributeRepository->listAttributes();
+        // dd($featuredProducts);
+
+        return view('site.pages.homepage', compact('featuredProducts', 'products'));
+    }
+
     public function addToCart(Request $request)
     {
         $product = $this->productRepository->findProductById($request->input('productId'));

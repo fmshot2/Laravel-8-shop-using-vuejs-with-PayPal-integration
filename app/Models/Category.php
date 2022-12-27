@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use TypiCMS\NestableTrait;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use NestableTrait;
+    use HasFactory;
 
     /**
      * @var string

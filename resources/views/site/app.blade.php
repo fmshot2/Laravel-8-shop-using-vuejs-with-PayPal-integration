@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') - {{ config('app.name') }}</title>
     @include('site.partials.styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/fonts/fontawesome/css/fontawesome-all.css') }}"/>
+
 </head>
 <body>
 @include('site.partials.header')

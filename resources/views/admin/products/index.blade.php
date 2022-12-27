@@ -27,8 +27,13 @@
                         </tr>
                         </thead>
                         <tbody>
+                            {{-- dd($products) --}}
+
+
                             @foreach($products as $product)
                                 <tr>
+                            {{-- {{dd($product->id)}} --}}
+
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->sku }}</td>
                                     <td>{{ $product->name }}</td>
