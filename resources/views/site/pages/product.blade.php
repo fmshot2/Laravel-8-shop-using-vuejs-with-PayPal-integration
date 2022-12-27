@@ -90,7 +90,7 @@
                                             <!-- item-property .// -->
                                         </div>
                                         <!-- col.// -->
-                                        <div class="col-sm-6 px-0 pl-0">
+                                        {{-- <div class="col-sm-6 px-0 pl-0">
                                             <dl class="dlist-inline">
                                                 <dt>Size: </dt>
                                                 <dd>
@@ -109,7 +109,7 @@
                                                 </dd>
                                             </dl>
                                             <!-- item-property .// -->
-                                        </div>
+                                        </div> --}}
                                         <!-- col.// -->
                                     </div>
                                     <form action="{{ route('product.add.cart') }}" method="POST" role="form"
@@ -148,7 +148,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <dl class="dlist-inline">
-                                                    <dt>Quantity: </dt>
+                                                    <dt>Quantities: </dt>
                                                     <dd>
                                                         <input class="form-control" type="number" min="1"
                                                             value="1" max="{{ $product->quantity }}" name="qty"
