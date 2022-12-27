@@ -194,7 +194,7 @@
         <section class="section-request bg padding-y-sm w-100">
             <div class="card shadow-sm border-0">
                 <div class="card-header d-flex justify-content-between p-2 text-white" style="background-color: #b60000;">
-                    <h4 class="card-title mt-2">Newest Products</h4>
+                    <h4 class="card-title mt-2">Featured Newest Products</h4>
                     {{-- <h4 class="card-title mt-2">See More <span class="caret"></span></h4> --}}
                     <a id="navbarDropdown" class="nav-link dropdown-toggle  text-white" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -203,8 +203,9 @@
 
                 </div>
                 <div class="row card-body">
-                    @foreach($featuredProducts as $featuredProduct)
-                    <div class="col-md-2 my-featured-card">
+                    @foreach($products as $product)
+                    @if ($loop->index <= 71)
+                    <a href="{{ route('product.show', $product->slug) }}" class="col-md-2 my-featured-card">
                         <figure class="card card-product">
                             <div class="reduction d-flex justify-content-end">
                                 <div class="card bg-light shadow-sm rounded w-25 m-1">
@@ -214,23 +215,24 @@
                             </div>
                             <div class="img-wrap">
                                 {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
-                                @if (count($featuredProduct->images) != 0)
-                                <img src="{{ asset('storage/' . $featuredProduct->images[0]->full) }}"
-                                                                    alt="">
+                                @if (count($product->images))
+                                <img src="{{ asset('storage/' . $product->images[0]->full) }}" alt="">
                                 @else
                                 <img src="{{ asset('frontend/images/items/1.jpg') }}">
                                 @endif
                             </div>
                             <figcaption class="info-wrap">
-                                <p class="title">Another</p>
+                                <p class="title">{{$product->name}}</p>
                             </figcaption>
                             <div class="bottom-wrap">
                                 <div class="price-wrap h5">
-                                    <span class="price-new">{{$featuredProduct->price}}</span> <del class="price-old">${{$featuredProduct->sale_price > 0 ? $featuredProduct->sale_price : ''}}</del>
+                                    <span class="price-new">${{$product->price}}</span> <h6 class="price-old">${{$product->sale_price > 0 ? $product->sale_price : ''}}</h6>
                                 </div>
                             </div>
                         </figure>
-                    </div>
+                    </a>
+                    @endif
+
                 @endforeach
                     {{-- <div class="col-md-2">
                         <figure class="card card-product">
@@ -258,13 +260,11 @@
                     </div> --}}
                 </div>
             </div>
-
-            <!-- container // -->
         </section>
 
-        <!-- ========================= Newest Products END========================= -->
+        <!-- ========================= Newest Products END ========================= -->
 
-        <!-- ========================= Best Selling Products carousel========================= -->
+        <!-- ========================= Best Selling Products carousel ========================= -->
 
 
         <section class="section-request bg padding-y-sm w-100">
@@ -411,7 +411,7 @@
 
                                         </div>
                                         <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/items/12.jpg') }}">
+                                            <img src="{{ asset('frontend/images/items/1.jpg') }}">
                                         </div>
 
                                         <figcaption class="info-wrap">
@@ -610,8 +610,14 @@
         </div>
         <div class="img-wrap">
             {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
+            {{-- <img src="{{ asset('storage/' . $product->images[0]->full) }}"
+            alt=""> --}}
+            @if (count($product->images))
             <img src="{{ asset('storage/' . $product->images[0]->full) }}"
-            alt="">
+                                                alt="">
+            @else
+            <img src="{{ asset('frontend/images/items/1.jpg') }}">
+            @endif
         </div>
 
         <figcaption class="info-wrap">

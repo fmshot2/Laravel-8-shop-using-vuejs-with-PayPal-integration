@@ -63,7 +63,7 @@ class BaseRepository implements BaseContract
      * * @param string $filterBy
      * @return mixed
      */
-    public function filter(string $order = 'id', string $sort = 'asc', $columns = array('*'), string $filter)
+    public function filter(string $order = 'id', string $sort = 'DESC', $columns = array('*'), string $filter)
     {
         return $this->model->where($filter, TRUE)->orderBy($order, $sort)->get($columns);
     }

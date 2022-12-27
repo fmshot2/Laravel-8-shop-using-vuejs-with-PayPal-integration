@@ -17,17 +17,20 @@ class Product extends Model
      */
     protected $fillable = [
         'brand_id', 'sku', 'name', 'slug', 'description', 'quantity',
-        'weight', 'price', 'sale_price', 'status', 'featured',
+        'weight', 'price', 'sale_price', 'status', 'featured', 'bestDeals', 'topRanked', 'bestSelling'
     ];
 
     /**
      * @var array
      */
     protected $casts = [
-        'quantity'  =>  'integer',
-        'brand_id'  =>  'integer',
-        'status'    =>  'boolean',
-        'featured'  =>  'boolean'
+        'quantity'      =>  'integer',
+        'brand_id'      =>  'integer',
+        'status'        =>  'boolean',
+        'featured'      =>  'boolean',
+        'bestDeals'     =>  'boolean',
+        'topRanked'     =>  'boolean',
+        'bestSelling'   =>  'boolean',
     ];
 
     /**

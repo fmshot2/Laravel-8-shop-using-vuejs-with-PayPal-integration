@@ -32,8 +32,6 @@ class ProductController extends BaseController
     {
         $products = $this->productRepository->listProducts();
 
-        // dd($products);
-
         $this->setPageTitle('Products', 'Products List');
         return view('admin.products.index', compact('products'));
     }

@@ -49,7 +49,7 @@ class ProductRepository extends BaseRepository implements ProductContract
      * @return mixed
      */
 
-    public function filterProducts(string $order = 'id', string $sort = 'asc', array $columns = ['*'], string $filter)
+    public function filterProducts(string $order = 'id', string $sort = 'DESC', array $columns = ['*'], string $filter)
     {
         return $this->filter($order,  $sort, $columns, $filter);
     }
@@ -81,9 +81,12 @@ class ProductRepository extends BaseRepository implements ProductContract
             $collection = collect($params);
 
             $featured = $collection->has('featured') ? 1 : 0;
+            $bestDeals = $collection->has('best-deals') ? 1 : 0;
+            $topRanked = $collection->has('top-ranked') ? 1 : 0;
+            $bestSelling = $collection->has('best-selling') ? 1 : 0;
             $status = $collection->has('status') ? 1 : 0;
 
-            $merge = $collection->merge(compact('status', 'featured'));
+            $merge = $collection->merge(compact('status', 'featured', 'bestDeals', 'topRanked', 'bestSelling'));
 
             $product = new Product($merge->all());
 

@@ -1,5 +1,7 @@
 @extends('admin.app')
-@section('title') {{ $pageTitle }} @endsection
+@section('title')
+    {{ $pageTitle }}
+@endsection
 @section('content')
     <div class="app-title">
         <div>
@@ -15,31 +17,36 @@
                 <div class="tile-body">
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
-                        <tr>
-                            <th> # </th>
-                            <th> SKU </th>
-                            <th> Name </th>
-                            <th class="text-center"> Brand </th>
-                            <th class="text-center"> Categories </th>
-                            <th class="text-center"> Price </th>
-                            <th class="text-center"> Status </th>
-                            <th style="width:100px; min-width:100px;" class="text-center text-danger"><i class="fa fa-bolt"> </i></th>
-                        </tr>
+                            <tr>
+                                <th> # </th>
+                                <th> SKU </th>
+                                <th> Name </th>
+                                <th class="text-center"> Brand </th>
+                                <th class="text-center"> Categories </th>
+                                <th class="text-center"> Price </th>
+                                <th class="text-center"> Status </th>
+                                <th class="text-center"> Featured </th>
+                                <th class="text-center"> Best Deals </th>
+                                <th class="text-center"> Best Selling </th>
+                                <th class="text-center"> Top Ranked </th>
+                                <th style="width:100px; min-width:100px;" class="text-center text-danger"><i
+                                        class="fa fa-bolt"> </i></th>
+                            </tr>
                         </thead>
                         <tbody>
                             {{-- dd($products) --}}
 
 
-                            @foreach($products as $product)
+                            @foreach ($products as $product)
                                 <tr>
-                            {{-- {{dd($product->id)}} --}}
+                                    {{-- {{dd($product->id)}} --}}
 
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->sku }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->brand->name }}</td>
                                     <td>
-                                        @foreach($product->categories as $category)
+                                        @foreach ($product->categories as $category)
                                             <span class="badge badge-info">{{ $category->name }}</span>
                                         @endforeach
                                     </td>
@@ -52,9 +59,40 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
+                                        @if ($product->featured == 1)
+                                            <span class="badge badge-success">Featured</span>
+                                        @else
+                                            <span class="badge badge-danger">Not Featured</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($product->bestDeals == 1)
+                                            <span class="badge badge-success">Best Deal</span>
+                                        @else
+                                            <span class="badge badge-danger">Not Best Deal</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($product->topRanked == 1)
+                                            <span class="badge badge-success">Top Ranked</span>
+                                        @else
+                                            <span class="badge badge-danger">Not Top Ranked</span>
+                                        @endif
+                                    </td>
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($product->bestSelling == 1)
+                                            <span class="badge badge-success">Best Selling</span>
+                                        @else
+                                            <span class="badge badge-danger">Not Best Selling</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('admin.products.edit', $product->id) }}"
+                                                class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.products.edit', $product->id) }}"
+                                                class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -69,5 +107,7 @@
 @push('scripts')
     <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">
+        $('#sampleTable').DataTable();
+    </script>
 @endpush

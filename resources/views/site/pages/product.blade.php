@@ -37,7 +37,7 @@
                                                                 <a id="carousel-selector-{{ $loop->index }}"
                                                                     class="selected" data-slide-to={{ $loop->index }}
                                                                     data-target="#myCarousel"> <img
-                                                                        src="{{ asset('storage/' . $product->images->first()->full) }}"
+                                                                        src="{{ asset('storage/' . $image->full) }}"
                                                                         class="img-fluid rounded"> </a> </li>
                                                         @endforeach
 
@@ -59,28 +59,59 @@
                             <aside class="col-sm-7">
                                 <article class="p-5">
                                     <h3 class="title mb-3">{{ $product->name }}</h3>
-                                    <dl class="row">
-                                        <dt class="col-sm-3">SKU</dt>
-                                        <dd class="col-sm-9">{{ $product->sku }}</dd>
-                                        <dt class="col-sm-3">Weight</dt>
-                                        <dd class="col-sm-9">{{ $product->weight }}</dd>
-                                    </dl>
                                     <div class="mb-3">
-                                        @if ($product->sale_price > 0)
-                                            <var class="price h3 text-danger">
-                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span
-                                                    class="num" id="productPrice">{{ $product->sale_price }}</span>
-                                                <del class="price-old">
-                                                    {{ config('settings.currency_symbol') }}{{ $product->price }}</del>
-                                            </var>
-                                        @else
-                                            <var class="price h3 text-warning">
-                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span
-                                                    class="num" id="productPrice">{{ $product->price }}</span>
-                                            </var>
-                                        @endif
+                                        <var class="price h3 text-warning">
+        <span class="currency">US $</span><span class="num">{{$product->price}}</span>
+    </var>
+                                        <span>/per item</span>
                                     </div>
-                                    <hr>
+                                    <dl>
+                                        <dt>Description</dt>
+                                        <dd>
+                                            <p>{{$product->description}}</p>
+                                        </dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dt class="col-sm-3">SKU : {{ $product->sku }}</dt>
+                                        {{-- <dd class="col-sm-9">{{ $product->sku }}</dd> --}}
+                                    </dl>
+                                    <div class="row">
+                                        <div class="col-sm-4 pr-0">
+                                            <dl class="dlist-inline">
+                                                <dt>Quantity: </dt>
+                                                <dd>
+                                                    <select class="form-control form-control-sm" style="width:70px;">
+                                                        <option> 1 </option>
+                                                        <option> 2 </option>
+                                                        <option> 3 </option>
+                                                    </select>
+                                                </dd>
+                                            </dl>
+                                            <!-- item-property .// -->
+                                        </div>
+                                        <!-- col.// -->
+                                        <div class="col-sm-6 px-0 pl-0">
+                                            <dl class="dlist-inline">
+                                                <dt>Size: </dt>
+                                                <dd>
+                                                    <label class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                        <span class="form-check-label">SM</span>
+                                                    </label>
+                                                    <label class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                        <span class="form-check-label">MD</span>
+                                                    </label>
+                                                    <label class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                        <span class="form-check-label">XXL</span>
+                                                    </label>
+                                                </dd>
+                                            </dl>
+                                            <!-- item-property .// -->
+                                        </div>
+                                        <!-- col.// -->
+                                    </div>
                                     <form action="{{ route('product.add.cart') }}" method="POST" role="form"
                                         id="addToCart">
                                         @csrf
@@ -141,6 +172,7 @@
                 <div class="col-md-12">
                     <article class="card mt-4">
                         <div class="card-body">
+                            <h4>Detail overview</h4>
                             {!! $product->description !!}
                         </div>
                     </article>

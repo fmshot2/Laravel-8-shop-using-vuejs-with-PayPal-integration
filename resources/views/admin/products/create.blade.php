@@ -148,28 +148,75 @@
                                     <label class="control-label" for="description">Description</label>
                                     <textarea name="description" id="description" rows="8" class="form-control"></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input"
-                                                   type="checkbox"
-                                                   id="status"
-                                                   name="status"
-                                                />Status
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input"
-                                                   type="checkbox"
-                                                   id="featured"
-                                                   name="featured"
-                                                />Featured
-                                        </label>
-                                    </div>
-                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input"
+                                                           type="checkbox"
+                                                           id="status"
+                                                           name="status"
+                                                        />Status
+                                                </label>
+                                            </div>
+                                            <p>Check this box to make product visible On Website</p>
+                                        </div></div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input"
+                                                           type="checkbox"
+                                                           id="featured"
+                                                           name="featured"
+                                                        />Featured
+                                                </label>
+                                            </div>
+                                            <p>Check this box to add this product to <span class="text-danger lead fw-bolder text-uppercase"> Special Featured Section </span> on website</p>
+
+                                        </div></div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input"
+                                                               type="checkbox"
+                                                               id="best-selling"
+                                                               name="best-selling"
+                                                            />Best Selling
+                                                    </label>
+                                                </div>
+                                                <p>Check this box to add this product to <span class="text-danger lead fw-bolder text-uppercase"> Best Selling Section </span> website</p>
+
+                                            </div></div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input"
+                                                               type="checkbox"
+                                                               id="top-ranked"
+                                                               name="top-ranked"
+                                                            />Top Ranked
+                                                    </label>
+                                                </div>
+                                                <p>Check this box to this product to <span class="text-danger lead fw-bolder text-uppercase"> Top Ranked Section </span> Website</p>
+                                            </div></div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input"
+                                                                   type="checkbox"
+                                                                   id="best-deals"
+                                                                   name="best-deals"
+                                                                />Best Deals
+                                                        </label>
+                                                    </div>
+                                                    <p>Check this box to add this product to <span class="text-danger lead fw-bolder text-uppercase"> Best Deals Section </span> on website</p>
+
+                                                </div></div>
                             </div>
                             <div class="tile-footer">
                                 <div class="row d-print-none mt-2">
