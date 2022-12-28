@@ -225,6 +225,14 @@
         border-top: none;
     }
 
+    .card-product .info-wrap .title {
+        color: black;
+    }
+
+    .card-product .bottom-wrap {
+        color: black;
+    }
+
     .section-pagetop {
         background-color: #cb4868 !important;
         /* background-color: #ba5326!important; */

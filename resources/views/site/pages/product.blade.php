@@ -59,12 +59,6 @@
                             <aside class="col-sm-7">
                                 <article class="p-5">
                                     <h3 class="title mb-3">{{ $product->name }}</h3>
-                                    <div class="mb-3">
-                                        <var class="price h3 text-warning">
-        <span class="currency">US $</span><span class="num">{{$product->price}}</span>
-    </var>
-                                        <span>/per item</span>
-                                    </div>
                                     <dl>
                                         <dt>Description</dt>
                                         <dd>
@@ -73,45 +67,26 @@
                                     </dl>
                                     <dl class="row">
                                         <dt class="col-sm-3">SKU : {{ $product->sku }}</dt>
-                                        {{-- <dd class="col-sm-9">{{ $product->sku }}</dd> --}}
                                     </dl>
-                                    <div class="row">
-                                        <div class="col-sm-4 pr-0">
-                                            <dl class="dlist-inline">
-                                                <dt>Quantity: </dt>
-                                                <dd>
-                                                    <select class="form-control form-control-sm" style="width:70px;">
-                                                        <option> 1 </option>
-                                                        <option> 2 </option>
-                                                        <option> 3 </option>
-                                                    </select>
-                                                </dd>
-                                            </dl>
-                                            <!-- item-property .// -->
-                                        </div>
-                                        <!-- col.// -->
-                                        {{-- <div class="col-sm-6 px-0 pl-0">
-                                            <dl class="dlist-inline">
-                                                <dt>Size: </dt>
-                                                <dd>
-                                                    <label class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                        <span class="form-check-label">SM</span>
-                                                    </label>
-                                                    <label class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                        <span class="form-check-label">MD</span>
-                                                    </label>
-                                                    <label class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                        <span class="form-check-label">XXL</span>
-                                                    </label>
-                                                </dd>
-                                            </dl>
-                                            <!-- item-property .// -->
-                                        </div> --}}
-                                        <!-- col.// -->
+                                    <div class="mb-3">
+                                        @if ($product->sale_price > 0)
+                                            <var class="price h3 text-danger">
+                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span
+                                                    class="num" id="productPrice">{{ $product->sale_price }}</span>
+                                                <del class="price-old">
+                                                    {{ config('settings.currency_symbol') }}{{ $product->price }}</del>
+                                            </var>
+                                        @else
+                                            <var class="price h3 text-warning">
+                                                <span class="currency">{{ config('settings.currency_symbol') }}</span><span
+                                                    class="num" id="productPrice">{{ $product->price }}</span>
+                                            </var>
+                                        @endif
                                     </div>
+                                    {{-- <form action="" method="POST" role="form"> --}}
+
+                                    <form action="{{ route('product.add.cart2') }}" method="POST" role="form"
+                                    id="addToCart2">
                                     <form action="{{ route('product.add.cart') }}" method="POST" role="form"
                                         id="addToCart">
                                         @csrf
@@ -141,29 +116,39 @@
                                                             </dd>
                                                         @endif
                                                     @endforeach
-                                                </dl>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <dl class="dlist-inline">
                                                     <dt>Quantities: </dt>
                                                     <dd>
                                                         <input class="form-control" type="number" min="1"
-                                                            value="1" max="{{ $product->quantity }}" name="qty"
+                                                            value="1" max="{{ $product->quantity }}" name="qty" id="whatsappQty"
                                                             style="width:70px;">
                                                         <input type="hidden" name="productId" value="{{ $product->id }}">
                                                         <input type="hidden" name="price" id="finalPrice"
                                                             value="{{ $product->sale_price != '' ? $product->sale_price : $product->price }}">
+                                                            <input type="hidden" name="productImage" id="productImage"
+                                                            value="{{ asset('storage/' . $image->full) }}"
+                                                                {{-- value="{{ $product->sale_price != '' ? $product->sale_price : $product->price }}" --}}
+                                                                >
                                                     </dd>
                                                 </dl>
+
                                             </div>
                                         </div>
                                         <hr>
-                                        <button type="submit" class="btn btn-warning"><i class="fas fa-shopping-cart"></i>
+                                        <button type="submit" class="btn btn-reverse-warning"><i class="fas fa-shopping-cart"></i>
                                             Add To Cart</button>
+                                            <button type="button" onclick="gotowhatsapp()" class="btn btn-success"><i class="fab fa-whatsapp"></i>
+                                                Order with whatsapp</button>
                                     </form>
+                                    {{-- <a href="#" class="btn  btn-primary"> Buy now </a> --}}
+                                    <button type="submit" class="btn btn-reversewarning"><i class="fas fa-shopping-cart"></i>
+                                        Order now</button>
+                                </form>
+                                {{-- <a href="#" class="btn btn-primary"> Continue with Whatsapp </a> --}}
+                                {{-- <div class="form-group">
+                                    <input type="button" class="btnSubmit btn-block" onclick="gotowhatsapp()" value="Go To WhatsApp" />
+                                </div> --}}
+                            {{-- </form> --}}
+
                                 </article>
                             </aside>
                         </div>
@@ -201,6 +186,42 @@
             });
         });
     </script>
+@endpush
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#addToCart2').submit(function(e) {
+                if ($('.option').val() == 0) {
+                    e.preventDefault();
+                    alert('Please select an option');
+                }
+            });
+            $('.option').change(function() {
+                $('#productPrice').html(
+                    "{{ $product->sale_price != '' ? $product->sale_price : $product->price }}");
+                let extraPrice = $(this).find(':selected').data('price');
+                let price = parseFloat($('#productPrice').html());
+                let finalPrice = (Number(extraPrice) + price).toFixed(2);
+                $('#finalPrice').val(finalPrice);
+                $('#productPrice').html(finalPrice);
+            });
+        });
+    </script>
+    <script>
+    function gotowhatsapp() {
+        var productImage = document.getElementById("productImage").value;
+        var whatsappQty = document.getElementById("whatsappQty").value;
+        var finalPrice = document.getElementById("finalPrice").value;
+
+        var url = "https://wa.me/23409039135154?text="
+            + "I saw this on your website" + "%0a"
+            + "Image: " + productImage + "%0a"
+            + "Quantity: " + whatsappQty + "%0a"
+            + "Price: " + finalPrice + "%0a";
+
+        window.open(url, '_blank').focus();
+    }
+</script>
 @endpush
 
 <style>

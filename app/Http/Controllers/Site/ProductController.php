@@ -43,11 +43,23 @@ class ProductController extends Controller
 
     public function addToCart(Request $request)
     {
+        // dd($product);
+
         $product = $this->productRepository->findProductById($request->input('productId'));
         $options = $request->except('_token', 'productId', 'price', 'qty');
+
 
         Cart::add(uniqid(), $product->name, $request->input('price'), $request->input('qty'), $options);
 
         return redirect()->back()->with('message', 'Item added to cart successfully.');
+    }
+
+    public function addToCart2(Request $request)
+    {
+        // dd($request);
+        $orderDetails = $request;
+        $product = $this->productRepository->findProductById($request->input('productId'));
+
+        return view('site.pages.checkoutwhatsapp', compact('product', 'orderDetails'));
     }
 }

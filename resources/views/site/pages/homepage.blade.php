@@ -203,61 +203,38 @@
 
                 </div>
                 <div class="row card-body">
-                    @foreach($products as $product)
-                    @if ($loop->index <= 71)
-                    <a href="{{ route('product.show', $product->slug) }}" class="col-md-2 my-featured-card">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
+                    @foreach ($products as $product)
+                        @if ($loop->index < 12)
+                            <a href="{{ route('product.show', $product->slug) }}" class="col-md-2 my-featured-card">
+                                <figure class="card card-product">
+                                    <div class="reduction d-flex justify-content-end">
+                                        <div class="card bg-light shadow-sm rounded w-25 m-1">
+                                            <p class="m-1"> - 20% </p>
+                                        </div>
 
-                            </div>
-                            <div class="img-wrap">
-                                {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
-                                @if (count($product->images))
-                                <img src="{{ asset('storage/' . $product->images[0]->full) }}" alt="">
-                                @else
-                                <img src="{{ asset('frontend/images/items/1.jpg') }}">
-                                @endif
-                            </div>
-                            <figcaption class="info-wrap">
-                                <p class="title">{{$product->name}}</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">${{$product->price}}</span> <h6 class="price-old">${{$product->sale_price > 0 ? $product->sale_price : ''}}</h6>
-                                </div>
-                            </div>
-                        </figure>
-                    </a>
-                    @endif
-
-                @endforeach
-                    {{-- <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 30% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/2.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div> --}}
+                                    </div>
+                                    <div class="img-wrap">
+                                        {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
+                                        @if (count($product->images))
+                                            <img src="{{ asset('storage/' . $product->images[0]->full) }}" alt="">
+                                        @else
+                                            <img src="{{ asset('frontend/images/items/1.jpg') }}">
+                                        @endif
+                                    </div>
+                                    <figcaption class="info-wrap">
+                                        <p class="title">{{ $product->name }}</p>
+                                    </figcaption>
+                                    <div class="bottom-wrap">
+                                        <div class="price-wrap h5">
+                                            <span class="price-new">${{ $product->price }}</span>
+                                            <h6 class="price-old">
+                                                ${{ $product->sale_price > 0 ? $product->sale_price : '' }}</h6>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </a>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -290,7 +267,8 @@
                                             </div>
 
                                         </div>
-                                        <div class="img-wrap owlimgwrap"  style="background-image: url('frontend/images/posts/3.jpg'); background-style: cover;">
+                                        <div class="img-wrap owlimgwrap"
+                                            style="background-image: url('frontend/images/posts/3.jpg'); background-style: cover;">
                                             {{-- <img src="{{ asset('frontend/images/items/item-sm.jpg') }}" width="10" height="10"> --}}
                                         </div>
 
@@ -306,270 +284,41 @@
                                         <!-- bottom-wrap.// -->
                                     </figure>
                                 </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 30% </p>
-                                            </div>
+                                @foreach ($products as $product)
+                                    @if ($product->bestSelling === true)
+                                        <a href="{{ route('product.show', $product->slug) }}"
+                                            class="col-md-2 my-featured-card">
+                                            <figure class="card card-product">
+                                                <div class="reduction d-flex justify-content-end">
+                                                    <div class="card bg-light shadow-sm rounded w-25 m-1">
+                                                        <p class="m-1"> - 20% </p>
+                                                    </div>
 
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/2.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/1.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/3.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/1.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/items/1.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                        </div>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-slide">
-                            <div class="row card-body">
-                                <div class="col-md-2 my-featured-card">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap owlimgwrap"  style="background-image: url('frontend/images/posts/3.jpg'); background-style: fit-content;">
-                                            {{-- <img src="{{ asset('frontend/images/items/item-sm.jpg') }}" width="10" height="10"> --}}
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 30% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/1.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/2.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/3.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/posts/1.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                            <!-- price-wrap.// -->
-                                        </div>
-                                        <!-- bottom-wrap.// -->
-                                    </figure>
-                                </div>
-                                <div class="col-md-2">
-                                    <figure class="card card-product">
-                                        <div class="reduction d-flex justify-content-end">
-                                            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                <p class="m-1"> - 20% </p>
-                                            </div>
-
-                                        </div>
-                                        <div class="img-wrap">
-                                            <img src="{{ asset('frontend/images/items/12.jpg') }}">
-                                        </div>
-
-                                        <figcaption class="info-wrap">
-                                            <p class="title">Another</p>
-                                        </figcaption>
-                                        <div class="bottom-wrap">
-                                            <div class="price-wrap h5">
-                                                <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                            </div>
-                                        </div>
-                                    </figure>
-                                </div>
+                                                </div>
+                                                <div class="img-wrap">
+                                                    {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
+                                                    @if (count($product->images))
+                                                        <img src="{{ asset('storage/' . $product->images[0]->full) }}"
+                                                            alt="">
+                                                    @else
+                                                        <img src="{{ asset('frontend/images/items/1.jpg') }}">
+                                                    @endif
+                                                </div>
+                                                <figcaption class="info-wrap">
+                                                    <p class="title">{{ $product->name }}</p>
+                                                </figcaption>
+                                                <div class="bottom-wrap">
+                                                    <div class="price-wrap h5">
+                                                        <span class="price-new">${{ $product->price }}</span>
+                                                        <h6 class="price-old">
+                                                            ${{ $product->sale_price > 0 ? $product->sale_price : '' }}
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </figure>
+                                        </a>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -589,7 +338,7 @@
             </header> --}}
             <div class="card shadow-sm border-0">
                 <div class="card-header d-flex justify-content-between p-2 text-white">
-                    <h4 class="card-title mt-2">Top Selling Products</h4>
+                    <h4 class="card-title mt-2">Top Ranked Products</h4>
                     {{-- <h4 class="card-title mt-2">See More <span class="caret"></span></h4> --}}
                     <a id="navbarDropdown" class="nav-link dropdown-toggle  text-white" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -598,328 +347,44 @@
 
                 </div>
                 <div class="row card-body">
-                    @foreach($products as $product)
-@if ($product->featured === TRUE)
-<div class="col-md-2 my-featured-card">
-    <figure class="card card-product">
-        <div class="reduction d-flex justify-content-end">
-            <div class="card bg-light shadow-sm rounded w-25 m-1">
-                <p class="m-1"> - 20% </p>
-            </div>
+                    @foreach ($products as $product)
+                        @if ($product->topRanked === true)
+                            <div class="col-md-2 my-featured-card">
+                                <figure class="card card-product">
+                                    <div class="reduction d-flex justify-content-end">
+                                        <div class="card bg-light shadow-sm rounded w-25 m-1">
+                                            <p class="m-1"> - 20% </p>
+                                        </div>
 
-        </div>
-        <div class="img-wrap">
-            {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
-            {{-- <img src="{{ asset('storage/' . $product->images[0]->full) }}"
+                                    </div>
+                                    <div class="img-wrap">
+                                        {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
+                                        {{-- <img src="{{ asset('storage/' . $product->images[0]->full) }}"
             alt=""> --}}
-            @if (count($product->images))
-            <img src="{{ asset('storage/' . $product->images[0]->full) }}"
+                                        @if (count($product->images))
+                                            <img src="{{ asset('storage/' . $product->images[0]->full) }}"
                                                 alt="">
-            @else
-            <img src="{{ asset('frontend/images/items/1.jpg') }}">
-            @endif
-        </div>
+                                        @else
+                                            <img src="{{ asset('frontend/images/items/1.jpg') }}">
+                                        @endif
+                                    </div>
 
-        <figcaption class="info-wrap">
-            <p class="title">Another</p>
-        </figcaption>
-        <div class="bottom-wrap">
-            <div class="price-wrap h5">
-                <span class="price-new">${{$product->price}}</span> <del class="price-old">${{$product->sale_price}}</del>
-            </div>
-            <!-- price-wrap.// -->
-        </div>
-        <!-- bottom-wrap.// -->
-    </figure>
-</div>
-@endif
-@endforeach
-                    <div class="col-md-2 my-featured-card">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
+                                    <figcaption class="info-wrap">
+                                        <p class="title">Another</p>
+                                    </figcaption>
+                                    <div class="bottom-wrap">
+                                        <div class="price-wrap h5">
+                                            <span class="price-new">${{ $product->price }}</span> <del
+                                                class="price-old">${{ $product->sale_price }}</del>
+                                        </div>
+                                        <!-- price-wrap.// -->
+                                    </div>
+                                    <!-- bottom-wrap.// -->
+                                </figure>
+                            </div>
+                        @endif
+                    @endforeach
 
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/1.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 30% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/2.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/3.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/4.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/5.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/7.jpg') }}"">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                            </div>
-                        </figure>
-                    </div>
-                </div>
-                <div class="row card-body">
-                    <div class="col-md-2 my-featured-card">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/1.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 30% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/2.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/3.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/4.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/5.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/7.jpg') }}"">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                            </div>
-                        </figure>
-                    </div>
                 </div>
             </div>
 
@@ -945,148 +410,44 @@
 
                 </div>
                 <div class="row card-body">
-                    <div class="col-md-2 my-featured-card">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
+                    @foreach ($products as $product)
+                        @if ($product->bestDeals === true)
+                            <div class="col-md-2 my-featured-card">
+                                <figure class="card card-product">
+                                    <div class="reduction d-flex justify-content-end">
+                                        <div class="card bg-light shadow-sm rounded w-25 m-1">
+                                            <p class="m-1"> - 20% </p>
+                                        </div>
 
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/7.jpg') }}">
-                            </div>
+                                    </div>
+                                    <div class="img-wrap">
+                                        {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
+                                        {{-- <img src="{{ asset('storage/' . $product->images[0]->full) }}"
+                                        alt=""> --}}
+                                        @if (count($product->images))
+                                            <img src="{{ asset('storage/' . $product->images[0]->full) }}"
+                                                alt="">
+                                        @else
+                                            <img src="{{ asset('frontend/images/items/1.jpg') }}">
+                                        @endif
+                                    </div>
 
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
+                                    <figcaption class="info-wrap">
+                                        <p class="title">Another</p>
+                                    </figcaption>
+                                    <div class="bottom-wrap">
+                                        <div class="price-wrap h5">
+                                            <span class="price-new">${{ $product->price }}</span> <del
+                                                class="price-old">${{ $product->sale_price }}</del>
+                                        </div>
+                                        <!-- price-wrap.// -->
+                                    </div>
+                                    <!-- bottom-wrap.// -->
+                                </figure>
                             </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 30% </p>
-                                </div>
+                        @endif
+                    @endforeach
 
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/6.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/comp.png') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/5.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/4.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                                <!-- price-wrap.// -->
-                            </div>
-                            <!-- bottom-wrap.// -->
-                        </figure>
-                    </div>
-                    <div class="col-md-2">
-                        <figure class="card card-product">
-                            <div class="reduction d-flex justify-content-end">
-                                <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                    <p class="m-1"> - 20% </p>
-                                </div>
-
-                            </div>
-                            <div class="img-wrap">
-                                <img src="{{ asset('frontend/images/items/7.jpg') }}">
-                            </div>
-
-                            <figcaption class="info-wrap">
-                                <p class="title">Another</p>
-                            </figcaption>
-                            <div class="bottom-wrap">
-                                <div class="price-wrap h5">
-                                    <span class="price-new">$1280</span> <del class="price-old">$1980</del>
-                                </div>
-                            </div>
-                        </figure>
-                    </div>
                 </div>
             </div>
 
@@ -1210,7 +571,7 @@
     </div>
 
     <!-- ========================= Subscribe ========================= -->
-    <section class="section-subscribe bg-primary padding-y-lg w-100" style="background-color: #b60000;">
+    <section class="section-subscribe padding-y-lg w-100" style="background-color: #b60000;">
         <div class="">
 
             <p class="pb-2 text-center white">Delivering the latest product trends and industry news straight to your inbox
