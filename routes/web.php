@@ -29,7 +29,14 @@ Route::get('/cart/clear', 'Site\CartController@clearCart')->name('checkout.cart.
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', 'Site\CheckoutController@getCheckout')->name('checkout.index');
+    Route::get('/checkoutwhatsapp', function () {
+        return view('site.pages.checkoutwhatsapp');
+    })->name('pages.checkoutwhatsapp');
+
+
     Route::post('/checkout/order', 'Site\CheckoutController@placeOrder')->name('checkout.place.order');
+    Route::post('/checkout/mail/order', 'Site\CheckoutController@placeMailOrder')->name('checkout.place.mail.order');
+
 
     Route::get('checkout/payment/complete', 'Site\CheckoutController@complete')->name('checkout.payment.complete');
 

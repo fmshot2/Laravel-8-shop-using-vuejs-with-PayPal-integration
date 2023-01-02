@@ -1,7 +1,7 @@
 @extends('site.app')
 @section('title', 'Homepage')
 @section('content')
-    <div class="big-container">
+    <div class="container">
         {{-- <h2>Homepage</h2> --}}
         <section class="section-main padding-top-sm femi-margin-top-normal p-1 border-0 shadow-sm">
             <div class="">
@@ -205,7 +205,36 @@
                 <div class="row card-body">
                     @foreach ($products as $product)
                         @if ($loop->index < 12)
-                            <a href="{{ route('product.show', $product->slug) }}" class="col-md-2 my-featured-card">
+                            <div class="col-md-2 my-featured-card">
+                                <div class="card card-product">
+                                    <div class="reduction d-flex justify-content-end">
+                                        <div class="card bg-light shadow-sm rounded w-25 m-1">
+                                            <p class="m-1"> - 20% </p>
+                                        </div>
+                                    </div>
+                                    <a href="{{ route('product.show', $product->slug) }}">
+                                        @if (count($product->images))
+                                            <img src="{{ asset('storage/' . $product->images[0]->full) }}" alt=""
+                                                class="card-img-top" />
+                                        @else
+                                            <img src="{{ asset('frontend/images/items/1.jpg') }}" class="card-img-top">
+                                        @endif
+                                    </a>
+                                    {{-- <div class="card-body">
+                                        <h5 class="card-title">{{ $product->name }}</h5>
+                                    </div> --}}
+                                    <li class="list-group-item" style="border: none">{{ $product->name }}</li>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="" style="margin-top: -5px; border: none; list-style-type:none; padding-left: 16px;;">N{{ $product->price }}</li>
+                                        {{-- <li class="" style="margin-top: -10px; border: none">N{{ $product->price }}</li> --}}
+                                        <li class=" text-grey" style="margin-top: -5px; border: none; list-style-type:none;  padding-left: 16px;">N{{ $product->price }}</li>
+                                        {{-- <li class="" style="list-style-type: none">{{ $product->sale_price > 0 ? $product->sale_price : '' }}</li> --}}
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            {{-- <div class="col-md-2 my-featured-card">
                                 <figure class="card card-product">
                                     <div class="reduction d-flex justify-content-end">
                                         <div class="card bg-light shadow-sm rounded w-25 m-1">
@@ -213,26 +242,26 @@
                                         </div>
 
                                     </div>
-                                    <div class="img-wrap">
-                                        {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
+                                    <a href="{{ route('product.show', $product->slug) }}" class="img-wrap">
                                         @if (count($product->images))
-                                            <img src="{{ asset('storage/' . $product->images[0]->full) }}" alt="">
+                                            <img src="{{ asset('storage/' . $product->images[0]->full) }}"
+                                                alt="">
                                         @else
                                             <img src="{{ asset('frontend/images/items/1.jpg') }}">
                                         @endif
-                                    </div>
+                                    </a>
                                     <figcaption class="info-wrap">
-                                        <p class="title">{{ $product->name }}</p>
+                                        <p class="">{{ $product->name }}</p>
                                     </figcaption>
                                     <div class="bottom-wrap">
                                         <div class="price-wrap h5">
-                                            <span class="price-new">${{ $product->price }}</span>
+                                            <span class="price-new">N{{ $product->price }}</span>
                                             <h6 class="price-old">
-                                                ${{ $product->sale_price > 0 ? $product->sale_price : '' }}</h6>
+                                                {{ $product->sale_price > 0 ? $product->sale_price : '' }}</h6>
                                         </div>
                                     </div>
                                 </figure>
-                            </a>
+                            </div> --}}
                         @endif
                     @endforeach
                 </div>
@@ -255,11 +284,11 @@
                     </a>
 
                 </div>
-                <div class="row card-body">
-                    <div class="owl-init slider-main owl-carousel" data-items="1" data-dots="false" data-nav="true">
+                <div class="row card-body myCarousel">
+                    <div class="owl-init slider-main owl-carousel" data-items="1" data-dots="false" data-nav="false">
                         <div class="item-slide">
                             <div class="row card-body">
-                                <div class="col-md-2 my-featured-card">
+                                {{-- <div class="col-md-2 my-featured-card">
                                     <figure class="card card-product">
                                         <div class="reduction d-flex justify-content-end">
                                             <div class="card bg-light shadow-sm rounded w-25 m-1">
@@ -269,7 +298,6 @@
                                         </div>
                                         <div class="img-wrap owlimgwrap"
                                             style="background-image: url('frontend/images/posts/3.jpg'); background-style: cover;">
-                                            {{-- <img src="{{ asset('frontend/images/items/item-sm.jpg') }}" width="10" height="10"> --}}
                                         </div>
 
                                         <figcaption class="info-wrap">
@@ -279,48 +307,47 @@
                                             <div class="price-wrap h5">
                                                 <span class="price-new">$1280</span> <del class="price-old">$1980</del>
                                             </div>
-                                            <!-- price-wrap.// -->
                                         </div>
-                                        <!-- bottom-wrap.// -->
                                     </figure>
-                                </div>
+                                </div> --}}
                                 @foreach ($products as $product)
-                                    @if ($product->bestSelling === true)
-                                        <a href="{{ route('product.show', $product->slug) }}"
-                                            class="col-md-2 my-featured-card">
-                                            <figure class="card card-product">
-                                                <div class="reduction d-flex justify-content-end">
-                                                    <div class="card bg-light shadow-sm rounded w-25 m-1">
-                                                        <p class="m-1"> - 20% </p>
-                                                    </div>
+                                @if ($loop->index < 12)
 
+                                    {{-- @if ($product->bestSelling === true) --}}
+                                    <div class="col-md-2 my-featured-card">
+                                        <div class="card card-product">
+                                            <div class="reduction d-flex justify-content-end">
+                                                <div class="card bg-light shadow-sm rounded w-25 m-1">
+                                                    <p class="m-1"> - 20% </p>
                                                 </div>
-                                                <div class="img-wrap">
-                                                    {{-- <img src="{{ asset('frontend/images/items/1.jpg') }}"> --}}
-                                                    @if (count($product->images))
-                                                        <img src="{{ asset('storage/' . $product->images[0]->full) }}"
-                                                            alt="">
-                                                    @else
-                                                        <img src="{{ asset('frontend/images/items/1.jpg') }}">
-                                                    @endif
-                                                </div>
-                                                <figcaption class="info-wrap">
-                                                    <p class="title">{{ $product->name }}</p>
-                                                </figcaption>
-                                                <div class="bottom-wrap">
-                                                    <div class="price-wrap h5">
-                                                        <span class="price-new">${{ $product->price }}</span>
-                                                        <h6 class="price-old">
-                                                            ${{ $product->sale_price > 0 ? $product->sale_price : '' }}
-                                                        </h6>
-                                                    </div>
-                                                </div>
-                                            </figure>
-                                        </a>
+                                            </div>
+                                            <a href="{{ route('product.show', $product->slug) }}">
+                                                @if (count($product->images))
+                                                    <img src="{{ asset('storage/' . $product->images[0]->full) }}" alt=""
+                                                        class="card-img-top" />
+                                                @else
+                                                    <img src="{{ asset('frontend/images/items/1.jpg') }}" class="card-img-top">
+                                                @endif
+                                            </a>
+                                            {{-- <div class="card-body">
+                                                <h5 class="card-title">{{ $product->name }}</h5>
+                                            </div> --}}
+                                            <li class="list-group-item" style="border: none">{{ $product->name }}</li>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="" style="margin-top: -5px; border: none; list-style-type:none; padding-left: 16px;;">N{{ $product->price }}</li>
+                                                {{-- <li class="" style="margin-top: -10px; border: none">N{{ $product->price }}</li> --}}
+                                                <li class=" text-grey" style="margin-top: -5px; border: none; list-style-type:none;  padding-left: 16px;">N{{ $product->price }}</li>
+                                                {{-- <li class="" style="list-style-type: none">{{ $product->sale_price > 0 ? $product->sale_price : '' }}</li> --}}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {{-- @endif --}}
                                     @endif
                                 @endforeach
                             </div>
                         </div>
+                        {{-- <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="fa fa-chevron-left"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-chevron-right"></i></button></div>
+                        <div class="owl-dots"></div> --}}
                     </div>
                 </div>
             </div>
@@ -600,3 +627,19 @@
         <!-- container // -->
     </section>
 @stop
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+    $(".myCarousel").owlCarousel({
+        items: 1,
+        nav: false,
+        dots: false,
+        autoplay: 3000,
+        loop: true,
+        // navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        mouseDrag: true,
+        touchDrag: true,
+    });
+});
+    </script>
+    @endpush

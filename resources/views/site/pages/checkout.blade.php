@@ -21,13 +21,14 @@
                     <div class="col-md-8">
                         <div class="card">
                             <header class="card-header">
-                                <h4 class="card-title mt-2">Billing Details</h4>
+                                <h4 class="card-title mt-2">Billing Details2</h4>
                             </header>
                             <article class="card-body">
                                 <div class="form-row">
                                     <div class="col form-group">
                                         <label>First names</label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name" value="{{ old('first_name') }}">
+                                        <input type="text" class="form-control" name="first_name" id="first_name"
+                                            value="{{ old('first_name') }}">
                                     </div>
                                     <div class="col form-group">
                                         <label>Last name</label>
@@ -60,8 +61,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" disabled>
-                                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <input type="email" class="form-control" name="email"
+                                        value="{{ auth()->user()->email }}" disabled>
+                                    <small class="form-text text-muted">We'll never share your email with anyone
+                                        else.</small>
                                 </div>
                                 <div class="form-group">
                                     <label>Order Notes</label>
@@ -80,13 +83,15 @@
                                     <article class="card-body">
                                         <dl class="dlist-align">
                                             <dt>Total cost: </dt>
-                                            <dd class="text-right h5 b"> {{ config('settings.currency_symbol') }}{{ \Cart::getSubTotal() }} </dd>
+                                            <dd class="text-right h5 b">
+                                                {{ config('settings.currency_symbol') }}{{ \Cart::getSubTotal() }} </dd>
                                         </dl>
                                     </article>
                                 </div>
                             </div>
                             <div class="col-md-12 mt-4">
-                                <button type="submit" class="subscribe btn btn-success btn-lg btn-block">Place Order</button>
+                                <button type="submit" class="subscribe btn btn-success btn-lg btn-block">Place
+                                    Order</button>
                             </div>
                         </div>
                     </div>
@@ -95,3 +100,28 @@
         </div>
     </section>
 @stop
+@push('scripts')
+    <script>
+        // Add To Cart Function
+
+        $(document).ready(function() {
+            let productImage = localStorage.getItem('productImage');
+            let whatsappQty = localStorage.getItem('whatsappQty');
+            let finalPrice = localStorage.getItem('finalPrice');
+            let previousUrl = localStorage.getItem('previousUrl');
+            if (productImage) {
+                document.getElementById("productImage").src = productImage;
+            }
+            if (whatsappQty) {
+                document.getElementById("whatsappQty").value = whatsappQty;
+            }
+            if (finalPrice) {
+                document.getElementById("finalPrice").value = finalPrice;
+            }
+            // return console.log('newproductImage', productImage);
+            // localStorage.setItem('finalPrice', finalPrice);
+
+            // return alert('productImage');
+        });
+    </script>
+@endpush

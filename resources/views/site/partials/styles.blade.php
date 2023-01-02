@@ -185,7 +185,7 @@
     }
 
     .section-request .col-md-2 {
-        max-height: 250px;
+        /* max-height: 250px; */
     }
 
     .card-product {
@@ -234,12 +234,14 @@
     }
 
     .section-pagetop {
-        background-color: #cb4868 !important;
+        /* background-color: #cb4868 !important; */
         /* background-color: #ba5326!important; */
+        background-color: #b60000;
     }
 
     .section-pagetop .title-page {
         color: #ffffff;
+        opacity: 1;
     }
 
     /* Product detail.blade.php */
