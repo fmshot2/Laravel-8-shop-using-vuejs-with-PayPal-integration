@@ -1,5 +1,5 @@
 ## About Laravel 8 Shop Using Vuejs With PayPal Integration App
-Multivendor Ecommerce App is a multivendor ecommerce app built with PHP/Laravel and VueJs. It includes a full admin mangement system for the Users, Products, Categories, etc. The Userr part involves a full search, filter, cart, wishlist and payment system with PayPal:
+This App is a multivendor ecommerce app built with PHP/Laravel and VueJs. It includes a full admin mangement system for the Users, Products, Categories, etc. The Userr part involves a full search, filter, cart, wishlist and payment system with PayPal:
 
 ## Running the Project
  To run, download, unzip, add your db in the env, then run the migratation and seed commands.
